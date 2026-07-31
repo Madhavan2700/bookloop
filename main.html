@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🔄📚 Book Loop | Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+height:100vh;
+overflow:hidden;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:
+linear-gradient(
+135deg,
+#4f46e5,
+#06b6d4,
+#ec4899
+);
+
+position:relative;
+
+}
+
+
+/* Floating Background Words */
+
+.words span{
+
+position:absolute;
+
+color:rgba(255,255,255,0.18);
+
+font-size:40px;
+
+font-weight:700;
+
+white-space:nowrap;
+
+animation:move 12s linear infinite;
+
+}
+
+
+.words span:nth-child(1){
+top:10%;
+left:5%;
+}
+
+.words span:nth-child(2){
+top:25%;
+right:5%;
+animation-delay:2s;
+}
+
+.words span:nth-child(3){
+top:45%;
+left:10%;
+animation-delay:4s;
+}
+
+.words span:nth-child(4){
+top:70%;
+right:15%;
+animation-delay:6s;
+}
+
+.words span:nth-child(5){
+top:85%;
+left:20%;
+}
+
+.words span:nth-child(6){
+top:15%;
+right:25%;
+}
+
+.words span:nth-child(7){
+top:55%;
+right:30%;
+}
+
+.words span:nth-child(8){
+top:80%;
+right:5%;
+}
+
+.words span:nth-child(9){
+top:35%;
+left:40%;
+}
+
+.words span:nth-child(10){
+top:60%;
+left:5%;
+}
+
+
+
+@keyframes move{
+
+0%{
+transform:translateX(-20px);
+}
+
+50%{
+transform:translateX(30px);
+}
+
+100%{
+transform:translateX(-20px);
+}
+
+}
+
+
+
+/* Main Box */
+
+.container{
+
+width:900px;
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(15px);
+
+border-radius:30px;
+
+padding:50px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+box-shadow:0 20px 50px rgba(0,0,0,.25);
+
+}
+
+
+
+/* Brand */
+
+.brand{
+
+width:50%;
+
+color:white;
+
+}
+
+
+.brand h1{
+
+font-size:55px;
+
+line-height:1.2;
+
+}
+
+
+.brand p{
+
+font-size:18px;
+
+margin-top:20px;
+
+line-height:30px;
+
+}
+
+
+
+/* Login Card */
+
+.box{
+
+background:white;
+
+width:350px;
+
+padding:40px;
+
+border-radius:25px;
+
+text-align:center;
+
+}
+
+
+.box h2{
+
+font-size:30px;
+
+color:#4338ca;
+
+}
+
+
+.box p{
+
+color:#777;
+
+margin:10px 0 30px;
+
+}
+
+
+
+/* Buttons */
+
+.buttons a{
+
+display:block;
+
+padding:15px;
+
+margin:15px 0;
+
+border-radius:30px;
+
+text-decoration:none;
+
+font-size:17px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+
+
+.login{
+
+background:#53ffd4;
+
+color:white;
+
+}
+
+
+.signup{
+
+background:#6dc8fd;
+
+color:white;
+
+}
+
+
+
+.buttons a:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+
+
+.bottom{
+
+margin-top:30px;
+
+color:#777;
+
+font-size:14px;
+
+}
+
+
+
+/* Mobile */
+
+@media(max-width:800px){
+
+body{
+
+overflow:auto;
+
+padding:20px;
+
+}
+
+
+.container{
+
+width:100%;
+
+padding:30px;
+
+flex-direction:column;
+
+gap:40px;
+
+}
+
+
+.brand{
+
+width:100%;
+
+text-align:center;
+
+}
+
+
+.brand h1{
+
+font-size:40px;
+
+}
+
+
+.box{
+
+width:100%;
+
+}
+
+
+.words span{
+
+font-size:25px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- Background Words -->
+
+<div class="words">
+
+<span>BUY BOOKS</span>
+<span>SELL BOOKS</span>
+<span>REUSE</span>
+<span>LEARN</span>
+<span>TEXTBOOKS</span>
+<span>ENGINEERING BOOKS</span>
+<span>SMART LEARNING</span>
+<span>CAMPUS EXCHANGE</span>
+<span>SAVE MONEY</span>
+<span>SHARE KNOWLEDGE</span>
+
+</div>
+
+
+
+<div class="container">
+
+
+<div class="brand">
+
+
+<h1>
+🔄📚
+<br>
+Book Loop
+</h1>
+
+
+<p>
+The smart way to buy, sell and exchange
+books within your campus.
+</p>
+
+
+</div>
+
+
+
+<div class="box">
+
+
+<h2>
+Welcome Back
+</h2>
+
+
+<p>
+Choose your option to continue
+</p>
+
+
+
+<div class="buttons">
+
+
+<!-- Student Login Button -->
+
+<a href="login.html" class="login">
+
+🎓 Student Login
+
+</a>
+
+
+
+<!-- Create Account Button -->
+
+<a href="signup.html" class="signup">
+
+✨ Create Account
+
+</a>
+
+
+</div>
+
+
+
+<div class="bottom">
+
+Buy • Sell • Reuse • Learn
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</body>
+
+</html>

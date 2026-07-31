@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>📚 Book Loop | Buy Books</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+min-height:100vh;
+
+background:
+linear-gradient(
+135deg,
+#4338ca,
+#0891b2,
+#db2777
+);
+
+padding:30px;
+
+}
+
+
+/* Header */
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+color:white;
+
+margin-bottom:30px;
+
+}
+
+
+.header h1{
+
+font-size:38px;
+
+}
+
+
+.back{
+
+background:white;
+
+padding:12px 25px;
+
+border-radius:30px;
+
+text-decoration:none;
+
+color:#4338ca;
+
+font-weight:600;
+
+}
+
+
+
+/* FILTER SECTION */
+
+
+.filter-box{
+
+
+background:rgba(255,255,255,.18);
+
+backdrop-filter:blur(20px);
+
+
+padding:25px;
+
+
+border-radius:25px;
+
+
+margin-bottom:40px;
+
+
+border:1px solid rgba(255,255,255,.3);
+
+
+}
+
+
+
+select{
+
+padding:14px;
+
+border-radius:15px;
+
+border:none;
+
+outline:none;
+
+font-size:15px;
+
+margin:5px;
+
+width:220px;
+
+}
+
+
+
+/* Books */
+
+
+.books-container{
+
+
+display:grid;
+
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(260px,1fr));
+
+
+gap:30px;
+
+
+}
+
+
+
+
+
+.book-card{
+
+
+background:
+
+rgba(255,255,255,.18);
+
+
+backdrop-filter:blur(20px);
+
+
+border-radius:25px;
+
+
+padding:25px;
+
+
+color:white;
+
+
+border:1px solid rgba(255,255,255,.3);
+
+
+transition:.3s;
+
+
+}
+
+
+
+.book-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+
+
+.book-card img{
+
+width:100%;
+
+height:260px;
+
+object-fit:cover;
+
+border-radius:15px;
+
+}
+
+
+
+.book-card h2{
+
+margin-top:15px;
+
+font-size:22px;
+
+}
+
+
+.book-card p{
+
+margin-top:8px;
+
+color:#e5e7eb;
+
+}
+
+
+.price{
+
+color:#53ffd4!important;
+
+font-size:20px;
+
+font-weight:700;
+
+}
+
+
+
+button{
+
+width:100%;
+
+margin-top:20px;
+
+padding:12px;
+
+border:none;
+
+border-radius:30px;
+
+background:white;
+
+color:#4338ca;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+background:#53ffd4;
+
+color:white;
+
+}
+
+
+
+.hidden{
+
+display:none;
+
+}
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="header">
+
+
+<h1>
+
+📚 Buy Books
+
+</h1>
+
+
+<a href="home.html" class="back">
+
+← Home
+
+</a>
+
+
+</div>
+
+
+
+
+
+<!-- FILTER -->
+
+
+<div class="filter-box">
+
+
+<select id="mainFilter" onchange="changeCategory()">
+
+<option value="">Select Category</option>
+
+<option value="college">College</option>
+
+<option value="school">School</option>
+
+<option value="tn">TN Exam Books</option>
+
+<option value="others">Others</option>
+
+</select>
+
+
+
+
+
+<select id="subFilter" onchange="filterBooks()">
+
+<option value="">Select Sub Category</option>
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="books-container">
+
+
+
+<!-- COLLEGE BOOKS -->
+
+
+<div class="book-card college CSE">
+
+<img src="book1.jpg">
+
+<h2>Data Structures</h2>
+
+<p>Author: Ellis Horowitz</p>
+
+<p class="price">₹500</p>
+
+<button>Buy Now</button>
+
+</div>
+
+
+
+
+<div class="book-card college ECE">
+
+<img src="book2.jpg">
+
+<h2>Digital Electronics</h2>
+
+<p>Author: R.P Jain</p>
+
+<p class="price">₹400</p>
+
+<button>Buy Now</button>
+
+</div>
+
+
+
+
+<div class="book-card college MECH">
+
+<img src="book3.jpg">
+
+<h2>Engineering Mechanics</h2>
+
+<p>Author: R.S Khurmi</p>
+
+<p class="price">₹450</p>
+
+<button>Buy Now</button>
+
+</div>
+
+
+
+
+
+
+
+<!-- SCHOOL BOOKS -->
+
+
+<div class="book-card school 10">
+
+<img src="book4.jpg">
+
+<h2>10th Mathematics</h2>
+
+<p>State Board</p>
+
+<p class="price">₹250</p>
+
+<button>Buy Now</button>
+
+</div>
+
+
+
+
+<div class="book-card school 12">
+
+<img src="book5.jpg">
+
+<h2>12th Physics</h2>
+
+<p>State Board</p>
+
+<p class="price">₹300</p>
+
+<button>Buy Now</button>
+
+</div>
+
+
+
+
+
+
+
+<!-- TN EXAM -->
+
+
+<div class="book-card tn">
+
+<img src="book6.jpg">
+
+<h2>TNPSC General Studies</h2>
+
+<p>TN Exam Preparation</p>
+
+<p class="price">₹350</p>
+
+<button>Buy Now</button>
+
+</div>
+
+
+
+
+
+
+
+<!-- OTHERS -->
+
+
+<div class="book-card others">
+
+<img src="book7.jpg">
+
+<h2>English Communication</h2>
+
+<p>General Category</p>
+
+<p class="price">₹200</p>
+
+<button>Buy Now</button>
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<script>
+
+
+let main=document.getElementById("mainFilter");
+
+let sub=document.getElementById("subFilter");
+
+
+
+function changeCategory(){
+
+
+let value=main.value;
+
+
+sub.innerHTML="";
+
+
+
+if(value=="college"){
+
+
+sub.innerHTML=`
+
+<option value="">Department</option>
+<option value="CSE">CSE</option>
+<option value="IT">IT</option>
+<option value="AIDS">AI&DS</option>
+<option value="ECE">ECE</option>
+<option value="EEE">EEE</option>
+<option value="MECH">MECH</option>
+<option value="CIVIL">CIVIL</option>
+
+`;
+
+}
+
+
+else if(value=="school"){
+
+
+sub.innerHTML=`
+
+<option value="">Class</option>
+<option value="6">6th</option>
+<option value="7">7th</option>
+<option value="8">8th</option>
+<option value="9">9th</option>
+<option value="10">10th</option>
+<option value="11">11th</option>
+<option value="12">12th</option>
+
+`;
+
+}
+
+
+else if(value=="tn"){
+
+
+sub.innerHTML=`
+
+<option value="">Category</option>
+<option value="tn">TNPSC</option>
+<option value="tn">TNEB</option>
+<option value="tn">TRB</option>
+
+`;
+
+}
+
+
+else if(value=="others"){
+
+
+sub.innerHTML=`
+
+<option value="">Category</option>
+<option value="others">Novel</option>
+<option value="others">Language</option>
+<option value="others">Competitive</option>
+
+`;
+
+}
+
+
+filterBooks();
+
+}
+
+
+
+
+
+function filterBooks(){
+
+
+let category=main.value;
+
+let subValue=sub.value;
+
+
+let books=document.querySelectorAll(".book-card");
+
+
+
+books.forEach(book=>{
+
+
+book.classList.add("hidden");
+
+
+
+if(category==""){
+
+book.classList.remove("hidden");
+
+}
+
+
+else if(book.classList.contains(category)){
+
+
+if(subValue==""){
+
+book.classList.remove("hidden");
+
+}
+
+
+else if(book.classList.contains(subValue)){
+
+
+book.classList.remove("hidden");
+
+
+}
+
+}
+
+
+
+});
+
+
+}
+
+
+
+</script>
+
+
+
+
+</body>
+
+</html>
