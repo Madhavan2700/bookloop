@@ -1,39 +1,75 @@
-console.log("Login JS loaded");
+document.addEventListener("DOMContentLoaded", function () {
 
-document.getElementById("loginForm").addEventListener("submit", async function(event){
-
-    event.preventDefault();
-
-    console.log("Login button clicked");
-
-    const regno = document.getElementById("regno").value;
-    const dob = document.getElementById("dob").value;
+    const loginForm = document.getElementById("loginForm");
 
 
-    const { data, error } = await supabaseClient
-        .from("profiles")
-        .select("*")
-        .eq("reg_no", regno)
-        .eq("dob", dob);
-
-
-    if(error){
-        alert("error.message");
-        console.log(error);
+    if (!loginForm) {
+        console.error("Login form not found");
         return;
     }
 
 
-    if(data.length > 0){
+    loginForm.addEventListener("submit", async function (event) {
 
-        alert("Login Successful");
-        window.location.href="home.html";
+        event.preventDefault();
 
-    }
-    else{
 
-        alert("Invalid Register Number or Date of Birth");
+        const regno = document.getElementById("regno").value.trim();
+        const dob = document.getElementById("dob").value;
 
-    }
+
+        if (!regno || !dob) {
+
+            alert("Please enter Register Number and Date of Birth");
+            return;
+
+        }
+
+
+        if (!window.supabaseClient) {
+
+            alert("Database connection error");
+            console.log("Supabase client missing");
+            return;
+
+        }
+
+
+
+        const { data, error } = await window.supabaseClient
+            .from("profiles")
+            .select("*")
+            .eq("reg_no", regno)
+            .eq("dob", dob);
+
+
+
+        if (error) {
+
+            console.log(error);
+            alert("Database Error: " + error.message);
+            return;
+
+        }
+
+
+
+        if (data && data.length > 0) {
+
+            alert("Login Successful");
+
+            window.location.href = "home.html";
+
+        }
+
+        else {
+
+            alert("Invalid Register Number or Date of Birth");
+
+        }
+
+
+    });
+
 
 });
