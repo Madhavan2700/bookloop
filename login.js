@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const loginForm = document.getElementById("loginForm");
 
-
     if (!loginForm) {
         console.error("Login form not found");
         return;
@@ -15,13 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const regno = document.getElementById("regno").value.trim();
-        const dobInput = document.getElementById("dob").value;
 
-const parts = dobInput.split("-");
+        const dobInput = document.getElementById("dob").value.trim();
 
-const dob = `${parts[2]}-${parts[1]}-${parts[0]}`;
 
-        if (!regno || !dob) {
+        if (!regno || !dobInput) {
 
             alert("Please enter Register Number and Date of Birth");
             return;
@@ -36,6 +33,25 @@ const dob = `${parts[2]}-${parts[1]}-${parts[0]}`;
             return;
 
         }
+
+
+        // Convert DD-MM-YYYY to YYYY-MM-DD for Supabase date column
+
+        const parts = dobInput.split("-");
+
+        if (parts.length !== 3) {
+
+            alert("Invalid Date Format");
+            return;
+
+        }
+
+
+        const dob = `${parts[2]}-${parts[1]}-${parts[0]}`;
+
+
+        console.log("Searching Reg No:", regno);
+        console.log("Searching DOB:", dob);
 
 
 
@@ -57,14 +73,17 @@ const dob = `${parts[2]}-${parts[1]}-${parts[0]}`;
 
 
 
+        console.log("Database Result:", data);
+
+
+
         if (data && data.length > 0) {
 
             alert("Login Successful");
 
             window.location.href = "home.html";
 
-        }
-
+        } 
         else {
 
             alert("Invalid Register Number or Date of Birth");
@@ -73,6 +92,5 @@ const dob = `${parts[2]}-${parts[1]}-${parts[0]}`;
 
 
     });
-
 
 });
