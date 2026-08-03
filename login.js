@@ -1,4 +1,6 @@
-document.getElementById("loginBtn").addEventListener("click", async function () {
+document.getElementById("loginForm").addEventListener("submit", async function (event) {
+
+    event.preventDefault();
 
     const regno = document.getElementById("regno").value;
     const dob = document.getElementById("dob").value;
@@ -19,7 +21,7 @@ document.getElementById("loginBtn").addEventListener("click", async function () 
         alert("Login Successful");
         window.location.href = "home.html";
     } else {
-        alert("Invalid Register Number or DOB");
+        alert("Invalid Register Number or Date of Birth");
     }
 
 });
