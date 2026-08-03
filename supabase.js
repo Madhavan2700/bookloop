@@ -6,4 +6,4 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_PUBLISHABLE_KEY
 );
 
-console.log("Supabase ready");
+console.log("Supabase CONNECTED");
