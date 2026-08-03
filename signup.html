@@ -176,7 +176,7 @@ color:#eee;
 }
 
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
@@ -200,14 +200,14 @@ color:#eee;
 
 <p>Join Book Loop Campus Exchange</p>
 
-<!-- Updated Form -->
-<form id="signupForm"">
+<!-- Updated Form: Cleaned onsubmit trigger to work via Event Listener -->
+<form id="signupForm">
 
 <div class="input-box">
 <label>User Name</label>
 <input
-type="text"
 id="username"
+type="text"
 placeholder="Enter your name"
 required>
 </div>
@@ -215,8 +215,8 @@ required>
 <div class="input-box">
 <label>Register Number</label>
 <input
-type="number"
 id="regno"
+type="number"
 placeholder="Enter Register Number"
 required>
 </div>
@@ -224,13 +224,13 @@ required>
 <div class="input-box">
 <label>Date of Birth</label>
 <input
-type="date"
 id="dob"
+type="date"
 required>
 </div>
 
-<button id="signupBtn">
-signup
+<button id="signupBtn" type="submit">
+Create Account
 </button>
 
 </form>
@@ -248,8 +248,13 @@ Already have an account? Login
 </a>
 
 </div>
-<button id="signupBtn">signup</button>
+
+<!-- Supabase CDN Client Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Supabase Configuration File -->
 <script src="supabase.js"></script>
+<!-- Signup Logic -->
 <script src="signup.js"></script>
+
 </body>
 </html>
