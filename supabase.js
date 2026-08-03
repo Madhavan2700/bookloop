@@ -16,4 +16,4 @@ if (window.supabase && window.supabase.createClient) {
 
     console.error("Supabase CDN not loaded");
 
-}
+}console.log(window.supabaseClient);
