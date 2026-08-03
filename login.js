@@ -18,8 +18,8 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
 
     if(error){
-        console.log(error);
         alert("Database Error");
+        console.log(error);
         return;
     }
 
