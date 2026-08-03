@@ -604,7 +604,21 @@ image.src=URL.createObjectURL(event.target.files[0]);
 </script>
 
 
+<script>
 
+const student = JSON.parse(localStorage.getItem("student"));
+
+if(student){
+
+    document.getElementById("username").value = student.username;
+    document.getElementById("regno").value = student.reg_no;
+
+    // Convert database date (YYYY-MM-DD) to input date
+    document.getElementById("dob").value = student.dob;
+
+}
+
+</script>
 
 </body>
 
