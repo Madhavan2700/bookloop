@@ -1,8 +1,19 @@
 const SUPABASE_URL = "https://jaosqglajbjchrlfgixc.supabase.co";
 
-window.supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-);
+const SUPABASE_PUBLISHABLE_KEY = "YOUR_REAL_KEY";
 
-console.log("Supabase client ready");
+
+if (window.supabase && window.supabase.createClient) {
+
+    window.supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+    console.log("Supabase connected");
+
+} else {
+
+    console.error("Supabase CDN not loaded");
+
+}
