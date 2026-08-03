@@ -1,50 +1,81 @@
-document.getElementById("signupForm").addEventListener("submit", async function (event) {
+// signup.js
 
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+    const signupForm = document.getElementById("signupForm");
 
-    const username = document.getElementById("username").value.trim();
-    const regno = document.getElementById("regno").value.trim();
-    const dob = document.getElementById("dob").value;
-
-    if (!username || !regno || !dob) {
-        alert("Please fill all fields.");
+    if (!signupForm) {
+        console.error("Error: Element with ID 'signupForm' not found.");
         return;
     }
 
-    // Check whether register number already exists
-    const { data: existingUser, error: checkError } = await supabase
-        .from("profiles")
-        .select("reg_no")
-        .eq("reg_no", regno);
+    signupForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-    if (checkError) {
-        console.log(checkError);
-        alert("Database Error");
-        return;
-    }
+        const usernameInput = document.getElementById("username");
+        const regnoInput = document.getElementById("regno");
+        const dobInput = document.getElementById("dob");
 
-    if (existingUser.length > 0) {
-        alert("Register Number already exists.");
-        return;
-    }
+        if (!usernameInput || !regnoInput || !dobInput) {
+            console.error("Error: One or more input elements (username, regno, dob) were not found in the DOM.");
+            alert("Form configuration error. Please check HTML IDs.");
+            return;
+        }
 
-    // Insert new user
-    const { error } = await supabase
-        .from("profiles")
-        .insert([
-            {
-                username: username,
-                reg_no: regno,
-                dob: dob
-            }
-        ]);
+        const username = usernameInput.value.trim();
+        const regno = regnoInput.value.trim();
+        const dob = dobInput.value;
 
-    if (error) {
-        console.log(error);
-        alert("Signup Failed");
-    } else {
-        alert("Account Created Successfully!");
-        window.location.href = "login.html";
-    }
+        if (!username || !regno || !dob) {
+            alert("Please fill all fields.");
+            return;
+        }
 
+        if (typeof window.supabaseClient === "undefined") {
+            console.error("Error: Supabase client is not initialized.");
+            alert("Database connection error. Please try again.");
+            return;
+        }
+
+        console.log("Checking if register number already exists:", regno);
+
+        // Check if register number already exists
+        const { data: existingUser, error: checkError } = await window.supabaseClient
+            .from("profiles")
+            .select("reg_no")
+            .eq("reg_no", regno);
+
+        if (checkError) {
+            console.error("Database check error:", checkError);
+            alert("Database Error: " + checkError.message);
+            return;
+        }
+
+        if (existingUser && existingUser.length > 0) {
+            console.warn("Register Number already exists:", regno);
+            alert("Register Number already exists.");
+            return;
+        }
+
+        console.log("Inserting new user record...");
+
+        // Insert new user record
+        const { data, error: insertError } = await window.supabaseClient
+            .from("profiles")
+            .insert([
+                {
+                    username: username,
+                    reg_no: regno,
+                    dob: dob
+                }
+            ]);
+
+        if (insertError) {
+            console.error("Insert error:", insertError);
+            alert("Signup Failed: " + insertError.message);
+        } else {
+            console.log("Account created successfully for:", regno);
+            alert("Account Created Successfully!");
+            window.location.href = "login.html";
+        }
+    });
 });
