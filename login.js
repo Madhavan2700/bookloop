@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     alert("Login Successful");
 
-    window.location.href = "profile.html";
+    window.location.href = "home.html";
 
         }
         else {
