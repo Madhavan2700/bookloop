@@ -1,19 +1,90 @@
-// supabase.js
+document.addEventListener("DOMContentLoaded", function () {
 
-const SUPABASE_URL = "https://jaosqglajbjchrlfgixc.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "YOUR_REAL_PUBLISHABLE_KEY";
+    const signupForm = document.getElementById("signupForm");
 
-if (typeof window.supabase !== "undefined" && typeof window.supabase.createClient === "function") {
+    if (!signupForm) {
+        console.error("Signup form not found");
+        return;
+    }
 
-    window.supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
 
-    console.log("Supabase Client initialized successfully.");
+    signupForm.addEventListener("submit", async function (event) {
 
-} else {
+        event.preventDefault();
 
-    console.error("Supabase CDN script is missing or not loaded.");
 
-}
+        const username = document.getElementById("username").value.trim();
+        const regno = document.getElementById("regno").value.trim();
+        const dob = document.getElementById("dob").value;
+
+
+        if (!username || !regno || !dob) {
+            alert("Please fill all fields");
+            return;
+        }
+
+
+        if (!window.supabaseClient) {
+            alert("Database connection error");
+            console.log("Supabase client missing");
+            return;
+        }
+
+
+        // Check existing register number
+
+        const { data: existingUser, error: checkError } =
+            await window.supabaseClient
+            .from("profiles")
+            .select("reg_no")
+            .eq("reg_no", regno);
+
+
+        if (checkError) {
+
+            console.log(checkError);
+            alert("Database Error: " + checkError.message);
+            return;
+
+        }
+
+
+        if (existingUser.length > 0) {
+
+            alert("Register Number already exists");
+            return;
+
+        }
+
+
+        // Create account
+
+        const { error: insertError } =
+            await window.supabaseClient
+            .from("profiles")
+            .insert([
+                {
+                    username: username,
+                    reg_no: regno,
+                    dob: dob
+                }
+            ]);
+
+
+        if (insertError) {
+
+            console.log(insertError);
+            alert("Signup Failed: " + insertError.message);
+            return;
+
+        }
+
+
+        alert("Account Created Successfully!");
+
+        window.location.href = "login.html";
+
+
+    });
+
+});
