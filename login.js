@@ -7,7 +7,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     const regno = document.getElementById("regno").value;
     const dob = document.getElementById("dob").value;
 
-    const { data, error } = await supabaseClient
+    const { data, error } = await window.supabaseClient
         .from("profiles")
         .select("*")
         .eq("reg_no", regno)
