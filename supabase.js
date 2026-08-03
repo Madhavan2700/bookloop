@@ -5,5 +5,5 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
 );
-
+console.log("URL:",SUPABASE_URL)
 console.log("Supabase CONNECTED");
