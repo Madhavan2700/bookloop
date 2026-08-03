@@ -15,8 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const regno = document.getElementById("regno").value.trim();
-        const dob = document.getElementById("dob").value;
+        const dobInput = document.getElementById("dob").value;
 
+const parts = dobInput.split("-");
+
+const dob = `${parts[2]}-${parts[1]}-${parts[0]}`;
 
         if (!regno || !dob) {
 
