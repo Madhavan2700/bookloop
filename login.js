@@ -79,11 +79,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (data && data.length > 0) {
 
-            alert("Login Successful");
+    localStorage.setItem("student", JSON.stringify(data[0]));
 
-            window.location.href = "home.html";
+    alert("Login Successful");
 
-        } 
+    window.location.href = "profile.html";
+
+        }
         else {
 
             alert("Invalid Register Number or Date of Birth");
