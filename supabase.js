@@ -1,9 +1,9 @@
 const SUPABASE_URL = "https://jaosqglajbjchrlfgixc.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "YOUR_KEY";
+const SUPABASE_PUBLISHABLE_KEY = "YOUR_REAL_KEY";
 
-const supabaseClient = window.supabase.createClient(
+window.supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
 );
-console.log("URL:",SUPABASE_URL)
-console.log("Supabase CONNECTED");
+
+console.log("Supabase client ready");
