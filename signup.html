@@ -176,7 +176,7 @@ color:#eee;
 }
 
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -201,12 +201,13 @@ color:#eee;
 <p>Join Book Loop Campus Exchange</p>
 
 <!-- Updated Form -->
-<form action="home.html">
+<form id="signupForm"">
 
 <div class="input-box">
 <label>User Name</label>
 <input
 type="text"
+id="username"
 placeholder="Enter your name"
 required>
 </div>
@@ -215,6 +216,7 @@ required>
 <label>Register Number</label>
 <input
 type="number"
+id="regno"
 placeholder="Enter Register Number"
 required>
 </div>
@@ -223,10 +225,11 @@ required>
 <label>Date of Birth</label>
 <input
 type="date"
+id="dob"
 required>
 </div>
 
-<button type="submit">
+<button type="button" id="signupBtn">
 Create Account
 </button>
 
@@ -245,6 +248,7 @@ Already have an account? Login
 </a>
 
 </div>
-
+<script src="supabase.js"></script>
+<script src="signup.js"></script>
 </body>
 </html>
