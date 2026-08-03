@@ -1,57 +1,96 @@
-console.log("Signup JS connected");
+console.log("🚀 signup.js successfully loaded.");
 
-const signupBtn = document.getElementById("signupBtn");
+// Ensure DOM is fully loaded before binding events
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("📄 DOM fully loaded and parsed.");
 
-signupBtn.addEventListener("click", async function () {
+    const signupForm = document.getElementById("signupForm");
 
-    const username = document.getElementById("username").value;
-    const regno = document.getElementById("regno").value;
-    const dob = document.getElementById("dob").value;
-
-
-    if (username === "" || regno === "" || dob === "") {
-        alert("Please fill all fields");
+    if (!signupForm) {
+        console.error("❌ Critical Error: 'signupForm' element not found in DOM!");
         return;
     }
 
+    signupForm.addEventListener("submit", async function (event) {
+        console.log("📥 Form submission triggered.");
+        event.preventDefault(); // Stop default browser page submit/refresh
 
-    const { data: existingUser, error: checkError } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("reg_no", regno);
+        // Verify Supabase instance presence
+        if (typeof supabase === "undefined" || !supabase) {
+            console.error("❌ Critical Error: Supabase client is not defined. Check supabase.js and URL/Key configuration.");
+            alert("Database client error! Check developer console.");
+            return;
+        }
 
+        const usernameInput = document.getElementById("username");
+        const regnoInput = document.getElementById("regno");
+        const dobInput = document.getElementById("dob");
 
-    if (checkError) {
-        console.log(checkError);
-        alert("Database error");
-        return;
-    }
+        const username = usernameInput ? usernameInput.value.trim() : "";
+        const regno = regnoInput ? regnoInput.value.trim() : "";
+        const dob = dobInput ? dobInput.value : "";
 
+        console.log("📋 Extracted Form Inputs:", { username, regno, dob });
 
-    if (existingUser.length > 0) {
-        alert("Register Number already exists");
-        return;
-    }
+        // Step 1: Validate empty fields
+        if (!username || !regno || !dob) {
+            console.warn("⚠️ Validation Failed: One or more fields are empty.");
+            alert("Please fill all fields");
+            return;
+        }
 
+        try {
+            console.log(`🔎 Checking if register number '${regno}' already exists...`);
 
-    const { error } = await supabase
-        .from("profiles")
-        .insert([
-            {
-                username: username,
-                reg_no: regno,
-                dob: dob
+            // Step 2: Check whether reg_no already exists in the Supabase "profiles" table
+            const { data: existingUser, error: checkError } = await supabase
+                .from("profiles")
+                .select("reg_no")
+                .eq("reg_no", regno);
+
+            if (checkError) {
+                console.error("❌ Supabase Select Query Error:", checkError);
+                alert(`Database Error: ${checkError.message}`);
+                return;
             }
-        ]);
 
+            console.log("🔍 Check query result:", existingUser);
 
-    if (error) {
-        console.log(error);
-        alert("Signup failed");
-    }
-    else {
-        alert("Account created successfully");
-        window.location.href = "login.html";
-    }
+            // Step 3: Check if register number exists
+            if (existingUser && existingUser.length > 0) {
+                console.warn(`⚠️ Register Number '${regno}' already exists in database.`);
+                alert("Register Number already exists!");
+                return;
+            }
 
+            console.log("➕ Inserting new user profile into Supabase...");
+
+            // Step 4: Insert username, reg_no, dob
+            const { data, error: insertError } = await supabase
+                .from("profiles")
+                .insert([
+                    {
+                        username: username,
+                        reg_no: regno,
+                        dob: dob
+                    }
+                ]);
+
+            if (insertError) {
+                console.error("❌ Supabase Insert Error:", insertError);
+                alert(`Signup Failed: ${insertError.message}`);
+            } else {
+                console.log("✅ Signup successful! Insert response:", data);
+                alert("Account Created Successfully!");
+
+                // Step 5: Redirect to login.html
+                console.log("🔄 Redirecting to login.html...");
+                window.location.href = "login.html";
+            }
+
+        } catch (err) {
+            console.error("💥 Unexpected JavaScript exception during execution:", err);
+            alert("An unexpected error occurred. Check browser console logs.");
+        }
+    });
 });
