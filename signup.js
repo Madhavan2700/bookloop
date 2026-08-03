@@ -1,4 +1,6 @@
-document.getElementById("signupBtn").addEventListener("click", async function () {
+console.log("signup.js loaded");
+
+document.getElementById("signupBtn").addEventListener("click", async function ()  {
 
     const username = document.getElementById("username").value.trim();
     const regno = document.getElementById("regno").value.trim();
