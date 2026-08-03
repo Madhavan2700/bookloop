@@ -18,7 +18,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
 
     if(error){
-        alert("Database Error");
+        alert("error.message");
         console.log(error);
         return;
     }
