@@ -527,7 +527,8 @@ Register Number
 
 <input 
 type="text"
-id="regno">
+id="regno"
+readonly>
 
 
 </div>
@@ -549,7 +550,8 @@ Date of Birth
 
 <input 
 type="date"
-id="dob">
+id="dob"
+readonly>
 
 </div>
 
@@ -558,7 +560,7 @@ id="dob">
 
 
 
-<button>
+<button id="saveBtn">
 
 Save Changes
 
@@ -618,10 +620,6 @@ if(student){
 
 }
 
-</script>
-<script>
-console.log(localStorage.getItem("student"));
-alert(localStorage.getItem("student"));
 </script>
 </body>
 
