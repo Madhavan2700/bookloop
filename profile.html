@@ -661,9 +661,11 @@ if(student){
 
     document.getElementById("username").value = student.username;
     document.getElementById("regno").value = student.reg_no;
-
-    // Convert database date (YYYY-MM-DD) to input date
     document.getElementById("dob").value = student.dob;
+
+    if(student.profile_image){
+        document.getElementById("preview").src = student.profile_image;
+    }
 
 }
 
