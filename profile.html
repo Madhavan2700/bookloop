@@ -10,7 +10,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 
 *{
@@ -570,31 +570,89 @@ readonly>
 
 </div>
 
-
-
-
-
-
-
 <script>
 
+async function previewImage(event) {
 
-function previewImage(event){
+    const file = event.target.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    const student = JSON.parse(localStorage.getItem("student"));
+
+    if (!student) {
+        alert("Student login data not found.");
+        return;
+    }
+
+    const regno = student.reg_no;
+
+    const fileName = regno + "_" + Date.now() + "_" + file.name;
+
+    // Upload image to Supabase Storage
+    const { error: uploadError } = await window.supabaseClient
+        .storage
+        .from("profile-images")
+        .upload(fileName, file);
+
+    if (uploadError) {
+
+        console.error("Upload error:", uploadError);
+
+        alert("Profile photo upload failed: " + uploadError.message);
+
+        return;
+    }
+
+    // Get public image URL
+    const { data: publicData } = window.supabaseClient
+        .storage
+        .from("profile-images")
+        .getPublicUrl(fileName);
+
+    const imageUrl = publicData.publicUrl;
+
+    // Display image immediately
+    document.getElementById("preview").src = imageUrl;
 
 
-let image=document.getElementById("preview");
+    // Save image URL in profiles table
+    const { error: updateError } = await window.supabaseClient
+        .from("profiles")
+        .update({
+            profile_image: imageUrl
+        })
+        .eq("reg_no", regno);
 
 
-image.src=URL.createObjectURL(event.target.files[0]);
+    if (updateError) {
 
+        console.error("Database update error:", updateError);
+
+        alert("Image uploaded, but database update failed: " + updateError.message);
+
+        return;
+    }
+
+
+    // Update localStorage
+    student.profile_image = imageUrl;
+
+    localStorage.setItem(
+        "student",
+        JSON.stringify(student)
+    );
+
+
+    alert("Profile photo updated successfully!");
 
 }
 
-
-
 </script>
 
-
+<script src="supabase.js"></script>
 <script>
 
 const student = JSON.parse(localStorage.getItem("student"));
